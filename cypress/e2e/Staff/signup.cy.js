@@ -28,15 +28,18 @@ describe('Kiibank',()=>{
       cy.contains("Confirm email").type(staff.confirm_email)
 
 
-cy.get('mat-label.ng-tns-c1205077789-9').type('ca');
+// cy.get('mat-label.ng-tns-c1205077789-9').type('ca');
 
-cy.get('#mat-autocomplete-0').each(($el, index, $list) => {
-  const countryName = $el.text().trim(); // Get the text content and trim any leading/trailing whitespace
+// cy.get('#mat-autocomplete-0').each(($el, index, $list) => {
+//   const countryName = $el.text().trim(); // Get the text content and trim any leading/trailing whitespace
 
-  if (countryName === "Cameroon") {
-    cy.wrap($el).click();
-  }
-});
+//   if (countryName === "Cameroon") {
+//     cy.wrap($el).click();
+//   }
+// });
+
+cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
+
 
       cy.contains("Mobile Number").type(staff.Mobile_Number)
       cy.contains("Gender").click()
@@ -47,14 +50,9 @@ cy.get('#mat-autocomplete-0').each(($el, index, $list) => {
    
      
       ///////////////////////// Next Page  /////////////////////////////////////////
-   
-   
-      
-   // cy.contains('Country').click({force:true})
-   
-   
-   cy.get('#mat-input-10').click()
-   cy.contains('Cameroon').click({force:true})
+
+
+   cy.selectDropdownOption('mat-label.ng-tns-c1205077789-16', 'Cameroon');
    cy.contains('Province/State').click()
    cy.contains('Centre').click()
    cy.contains('City').click()

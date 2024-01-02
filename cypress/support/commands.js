@@ -25,3 +25,17 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 
 /// <reference types="cypress" />
+
+
+Cypress.Commands.add('selectDropdownOption', (labelSelector, optionText) => {
+    cy.get(labelSelector).type(optionText);
+    
+    cy.get('div[role="listbox"]').each(($el, index, $list) => {
+      const countryName = $el.text().trim();
+  
+      if (countryName === optionText) {
+        cy.wrap($el).click();
+      }
+    });
+  });
+  

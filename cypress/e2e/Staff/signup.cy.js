@@ -63,8 +63,6 @@ cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
    cy.contains('Postal/Zip Code ').type(staff.code)
    cy.get('mat-label.ng-tns-c1205077789-19').click({force:true})
    cy.contains('Two Year').click()
-   
-   
    cy.get('#mat-input-36').click({force:true})
    cy.contains('Cameroon').click({force:true})
    cy.get('mat-label.ng-tns-c1205077789-57').click()

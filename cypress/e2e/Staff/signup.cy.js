@@ -28,21 +28,16 @@ describe('Kiibank',()=>{
       cy.contains("Confirm email").type(staff.confirm_email)
 
 
-// cy.get("#mat-autocomplete-0").as('option')
-// cy.get('@option').each(($el, index, $list)=>{
-// const countryopt=$el.find('spam.mdc-list-item__primary-text').text()
-// if(countryopt.includes('Cameroon'))
-//  {
-//    cy.wrap($el).select()
+cy.get('mat-label.ng-tns-c1205077789-9').type('ca');
 
-//  }
-// })
+cy.get('#mat-autocomplete-0').each(($el, index, $list) => {
+  const countryName = $el.text().trim(); // Get the text content and trim any leading/trailing whitespace
 
+  if (countryName === "Cameroon") {
+    cy.wrap($el).click();
+  }
+});
 
-// cy.contains('Country of birth').select('Cameroon')
-// cy.get('#mat-input-8').click().select('Cameroon')
-      cy.contains('Country of birth').click({force:true})
-      cy.contains('Cameroon').click()
       cy.contains("Mobile Number").type(staff.Mobile_Number)
       cy.contains("Gender").click()
       cy.contains('Male').click()

@@ -7,7 +7,8 @@ module.exports = defineConfig({
       
     },
 
-  baseUrl:"https://qakiibankweb.kiibank.net/login",
+  baseUrl:"https://kiibankweb.moneyfex.net"
+  // https://kiibankweb.moneyfex.net/login,
 
   
   },

@@ -28,6 +28,13 @@ describe('Kiibank',()=>{
       cy.contains("Confirm email").type(staff.confirm_email)
 
 
+      // cy.get('.mdc-button__label > span').click()
+      cy.get('.mat-mdc-button-touch-target').each(($el, index, $list)=>{
+         
+      })
+
+
+
 // cy.get('mat-label.ng-tns-c1205077789-9').type('ca');
 
 // cy.get('#mat-autocomplete-0').each(($el, index, $list) => {

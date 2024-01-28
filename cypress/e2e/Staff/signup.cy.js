@@ -19,7 +19,10 @@ describe('Kiibank',()=>{
       cy.contains("First Name").type(staff.Name)
       cy.contains("Middle Name").type(staff.Middle)
       cy.contains("Last Name").type(staff.Last)
-      // // cypress/integration/date_of_birth_spec.js
+
+      // cy.selectRandomDateOfBirth();
+
+      // cypress/integration/date_of_birth_spec.js
 
 
       // Click on the Date of Birth field to open the calendar pop-up
@@ -59,11 +62,6 @@ describe('Kiibank',()=>{
       // Continue with the rest of your test or assertions.
 
 
-      // cy.contains("Date of Birth").click({force:true})
-      // cy.get('.mdc-button__label > span').click()
-      // cy.get('.mat-calendar-content').click(2000)
-      // cy.get('.mat-calendar-content').click(10)
-      // cy.get('.mat-calendar-content').click(20).click({force: true})
       cy.contains("Email Address").type(staff.email_adress)
       cy.contains("Confirm Email").type(staff.confirm_email)
 

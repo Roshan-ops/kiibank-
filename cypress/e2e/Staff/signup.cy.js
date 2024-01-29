@@ -106,21 +106,68 @@ cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
    cy.contains('Address Line 1 ').type(staff.Address_Line1)
    cy.contains('Address Line 2 ').type(staff.Address_Line2)
    cy.contains('Postal/Zip Code ').type(staff.code)
-   cy.get('mat-label.ng-tns-c1205077789-19').click({force:true})
-   cy.contains('Two Year').click()
-   cy.get('#mat-input-36').click({force:true})
-   cy.contains('Cameroon').click({force:true})
-   cy.get('mat-label.ng-tns-c1205077789-57').click()
-   cy.contains('Centre').click()
-   cy.get('#mat-input-41').click()
-   cy.contains('Akono').click({force:true})
-   cy.get('#mat-input-37').type(staff.Address)
-   cy.get('#mat-input-38').type(staff.Address2)
-   cy.get('#mat-input-39').type(staff.Postal)
-   cy.get('mat-label.ng-tns-c1205077789-55').click({force:true})
-   cy.contains('Three Year').click({force:true})
-   cy.contains('Next').click({force:true})
+   cy.get('#mat-mdc-form-field-label-32').click({force:true})
+
+ const options = [
+      'Less Than One Year',
+      'One Year',
+      'Two Year',
+      'Three Year',
+      'More Than Three Year',
+    ];
+
+    // Select a random option
+    const randomIndex = Cypress._.random(0, options.length - 1);
+    const selectedOption = options[randomIndex];
+
+    // Click on the selected option
+    cy.contains(selectedOption).click();
+
+    // Check if additional information needs to be filled
+      if (selectedOption === 'Less than one year' || selectedOption === 'One year' || selectedOption === 'Two years') {
+      // Fill in additional information if staying duration is less than three years
+        cy.selectDropdownOption('#mat-mdc-form-field-label-80', 'Cameroon');
+        cy.selectDropdownOption('#mat-mdc-form-field-label-90', 'Centre');
+        cy.selectDropdownOption('#mat-mdc-form-field-label-78', 'Akono');
+
+
+
+        cy.get('#mat-mdc-form-field-label-82').type(staff.Address);
+        cy.get('#mat-mdc-form-field-label-84').type(staff.Address2)
+        cy.get('#mat-mdc-form-field-label-86').type(staff.Postal)
+
+
+      // Click on the "How long you have been staying here" field again
+      cy.contains('How long you have been staying here').click({ force: true });
+      // Select a new random staying duration after filling additional info
+      const newRandomIndex = Cypress._.random(0, options.length - 1);
+      const newSelectedOption = options[newRandomIndex];
+      // Click on the new selected duration option
+      cy.contains(newSelectedOption).click();
+    }
+    else{
+       cy.contains('Next').click({force:true})
    cy.wait(4000)
+    }
+
+
+
+
+
+  //  cy.contains('Two Year').click()
+  //  cy.get('#mat-input-36').click({force:true})
+  //  cy.contains('Cameroon').click({force:true})
+  //  cy.get('mat-label.ng-tns-c1205077789-57').click()
+  //  cy.contains('Centre').click()
+  //  cy.get('#mat-input-41').click()
+  //  cy.contains('Akono').click({force:true})
+  //  cy.get('#mat-input-37').type(staff.Address)
+  //  cy.get('#mat-input-38').type(staff.Address2)
+  //  cy.get('#mat-input-39').type(staff.Postal)
+  //  cy.get('mat-label.ng-tns-c1205077789-55').click({force:true})
+  //  cy.contains('Three Year').click({force:true})
+  //  cy.contains('Next').click({force:true})
+  //  cy.wait(4000)
    
    
    

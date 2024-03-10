@@ -51,7 +51,42 @@ describe('Date of Birth Selection', () => {
   
     it('should select a random date of birth', () => {
       // Use the custom command to select a random date of birth
-      cy.selectRandomDateOfBirth();
+
+// Define an array of options
+const option = ['Less Than One Year', 'One Year', 'Two Year', 'Three Year', 'More Than Three Year'];
+
+// Shuffle the options array
+  
+//   // Select a random option
+const shuffledOptions = Cypress._.shuffle(option);
+
+// Variable to keep track of total living years
+let totalLivingYears = 0;
+
+// Iterate over each option
+shuffledOptions.forEach((option, index) => {
+  it(`Should select option "${option}" and check if additional form is visible if living years is less than three`, () => {
+    // Click on the field to open the dropdown
+    cy.get('mat-label.ng-tns-c1205077789-17').click();
+    
+    // Click on the option based on the current iteration
+    cy.get('.cdk-overlay-pane').contains(option).click();
+    
+    // Update total living years based on the current option
+    totalLivingYears += index + 1; // index is zero-based, so adding 1
+    
+    // If total living years is less than three and the option is not 'More Than Three Year'
+    if (totalLivingYears < 3 && index !== 4) {
+      // Additional form should be visible
+      cy.get('.additional-form').should('be.visible');
+      // Add more assertions or actions as needed
+    } else {
+      // Additional form should not be visible
+      cy.get('.additional-form').should('not.be.visible');
+      // Add more assertions or actions as needed
+    }
+  });
+});
   
       // Continue with the rest of your test or assertions.
     });

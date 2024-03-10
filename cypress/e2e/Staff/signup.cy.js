@@ -10,15 +10,17 @@ describe('Kiibank',()=>{
    cy.fixture('staffs.json').then((staff)=>{
    
       cy.visit('/')
+
       cy.wait(5000)
 
-      cy.contains('Sign up').click()
+      cy.contains('Sign Up').click()
       //making assertion
       cy.url().should('include', 'https', '/staff-registration')
    
-      cy.contains("First Name").type(staff.Name)
-      cy.contains("Middle Name").type(staff.Middle)
-      cy.contains("Last Name").type(staff.Last)
+      cy.get("#mat-input-3").type(staff.Name)
+      
+      cy.get("#mat-input-4").type(staff.Middle)
+      cy.get("#mat-input-5").type(staff.Last)
 
       // cy.selectRandomDateOfBirth();
 
@@ -117,19 +119,21 @@ cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
       ///////////////////////// Next Page  /////////////////////////////////////////
 
 
-   cy.selectDropdownOption('mat-label.ng-tns-c1205077789-16', 'Cameroon');
+   cy.selectDropdownOption('mat-label.ng-tns-c1205077789-40', 'Cameroon');
    cy.wait(1000)
    cy.contains('Province/State').click()
    cy.contains('Centre').click()
+   cy.wait(2000)
    cy.contains('City').click()
+   cy.wait(2000)
    cy.contains('Akono').click()
    // cy.contains('Sekondi-Takoradi').click()
-   cy.contains('Address Line 1 ').type(staff.Address_Line1)
-   cy.contains('Address Line 2 ').type(staff.Address_Line2)
-   cy.contains('Postal/Zip Code ').type(staff.code)
-   cy.get('#mat-mdc-form-field-label-32').click({force:true})
+   cy.contains('Address Line 1').type(staff.Address_Line1)
+   cy.contains('Address Line 2').type(staff.Address_Line2)
+   cy.contains('Postal/Zip Code').type(staff.code)
+   cy.get('mat-label.ng-tns-c1205077789-17').click({force:true})
 
-
+// Form
 
    const options = [
     'Less Than One Year',
@@ -141,7 +145,7 @@ cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
   
   // Select a random option
   const randomIndex = Cypress._.random(0, options.length - 1);
-  const selectedOption = options[randomIndex];
+  const selectedOptions = options[randomIndex];
   
   // Click on the selected option
   cy.contains(selectedOption).click({force:true});
@@ -251,76 +255,109 @@ cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
   cy.contains('Next').should('be.visible').click({ force: true });
   cy.wait(4000);
 
-//  const options = [
-//       'Less Than One Year',
-//       'One Year',
-//       'Two Year',
-//       'Three Year',
-//       'More Than Three Year',
-//     ];
+ const option = [
+      'Less Than One Year',
+      'One Year',
+      'Two Year',
+      'Three Year',
+      'More Than Three Year',
+    ];
 
-//     // Select a random option
-//     const randomIndex = Cypress._.random(0, options.length - 1);
-//     const selectedOption = options[randomIndex];
+    // Select a random option
+    const randomIndex = Cypress._.random(0, option.length - 1);
+    const selectedOption = options[randomIndex];
 
-//     // Click on the selected option
-//     cy.contains(selectedOption).click();
+    // Click on the selected option
+    cy.contains(selectedOption).click();
 
-//     // Check if additional information needs to be filled
-//       if (selectedOption === 'Less than one year' || selectedOption === 'One year' || selectedOption === 'Two years') {
-//       // Fill in additional information if staying duration is less than three years
-//         cy.selectDropdownOption('#mat-mdc-form-field-label-80', 'Cameroon');
-//         cy.selectDropdownOption('#mat-mdc-form-field-label-90', 'Centre');
-//         cy.selectDropdownOption('#mat-mdc-form-field-label-78', 'Akono');
-
-
-
-//         cy.get('#mat-mdc-form-field-label-82').type(staff.Address);
-//         cy.get('#mat-mdc-form-field-label-84').type(staff.Address2)
-//         cy.get('#mat-mdc-form-field-label-86').type(staff.Postal)
-
-
-//       // Click on the "How long you have been staying here" field again
-//       cy.contains('How long you have been staying here').click({ force: true });
-//       // Select a new random staying duration after filling additional info
-//       const newRandomIndex = Cypress._.random(0, options.length - 1);
-//       const newSelectedOption = options[newRandomIndex];
-//       // Click on the new selected duration option
-//       cy.contains(newSelectedOption).click();
-//     }
-//     else{
-//        cy.contains('Next').click({force:true})
-//    cy.wait(4000)
-//     }
+    // Check if additional information needs to be filled
+      if (selectedOption === 'Less than one year' || selectedOption === 'One year' || selectedOption === 'Two years') {
+      // Fill in additional information if staying duration is less than three years
+        cy.selectDropdownOption('#mat-mdc-form-field-label-80', 'Cameroon');
+        cy.selectDropdownOption('#mat-mdc-form-field-label-90', 'Centre');
+        cy.selectDropdownOption('#mat-mdc-form-field-label-78', 'Akono');
 
 
 
+        cy.get('#mat-mdc-form-field-label-82').type(staff.Address);
+        cy.get('#mat-mdc-form-field-label-84').type(staff.Address2)
+        cy.get('#mat-mdc-form-field-label-86').type(staff.Postal)
 
 
-  //  cy.contains('Two Year').click()
-  //  cy.get('#mat-input-36').click({force:true})
-  //  cy.contains('Cameroon').click({force:true})
-  //  cy.get('mat-label.ng-tns-c1205077789-57').click()
-  //  cy.contains('Centre').click()
-  //  cy.get('#mat-input-41').click()
-  //  cy.contains('Akono').click({force:true})
-  //  cy.get('#mat-input-37').type(staff.Address)
-  //  cy.get('#mat-input-38').type(staff.Address2)
-  //  cy.get('#mat-input-39').type(staff.Postal)
-  //  cy.get('mat-label.ng-tns-c1205077789-55').click({force:true})
-  //  cy.contains('Three Year').click({force:true})
-  //  cy.contains('Next').click({force:true})
-  //  cy.wait(4000)
+      // Click on the "How long you have been staying here" field again
+      cy.contains('How long you have been staying here').click({ force: true });
+      // Select a new random staying duration after filling additional info
+      const newRandomIndex = Cypress._.random(0, options.length - 1);
+      const newSelectedOption = options[newRandomIndex];
+      // Click on the new selected duration option
+      cy.contains(newSelectedOption).click();
+    }
+    else{
+       cy.contains('Next').click({force:true})
+   cy.wait(4000)
+    }
+
+
+
+
+
+   cy.contains('Two Year').click()
+   cy.get('#mat-input-36').click({force:true})
+   cy.contains('Cameroon').click({force:true})
+   cy.get('mat-label.ng-tns-c1205077789-57').click()
+   cy.contains('Centre').click()
+   cy.get('#mat-input-41').click()
+   cy.contains('Akono').click({force:true})
+   cy.get('#mat-input-37').type(staff.Address)
+   cy.get('#mat-input-38').type(staff.Address2)
+   cy.get('#mat-input-39').type(staff.Postal)
+   cy.get('mat-label.ng-tns-c1205077789-55').click({force:true})
+   cy.contains('Three Year').click({force:true})
+   cy.contains('Next').click({force:true})
+   cy.wait(4000)
    
    
    
 
 
-  //  cy.get('.mat-mdc-button-persistent-ripple mdc-button__ripple').click({ force: true });
-  //  cy.wait(4000);
+
   cy.get('div[_ngcontent-ng-c1998308113=""][style=""] > .flex-between > :nth-child(2) > .mat-stepper-next > .mat-mdc-button-touch-target').click()
   // cy.contains('Next').should('be.visible').click({ force: true });
   cy.wait(4000);
+
+
+
+// Test
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    cy.get('h4').should('contain', 'Staff KIN')
    
    cy.get('mat-label.ng-tns-c1205077789-21').type(staff.Kin_name)
@@ -374,7 +411,7 @@ cy.selectDropdownOption('mat-label.ng-tns-c1205077789-9', 'Cameroon');
          // cy.get('label[for="inputidentityDocumentBack"]').selectFile('cypress/fixtures/image.png',{force: true})
          cy.get('label[for="inputresidencePermit"]').selectFile('cypress/fixtures/image.png',{force: true})
 
-   //  });
+   
     
     });
    });
